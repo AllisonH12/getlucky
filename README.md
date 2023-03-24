@@ -1,4 +1,4 @@
-Yi Jing Game
+Lucky Game
 
 This is a web application that allows users to generate Yi Jing hexagram based on your inputs and receive a divinatory interpretation of that hexagram.
 
