@@ -1,8 +1,9 @@
 import random
-from flask import Flask, render_template, request
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
 
-
-app = Flask(__name__)
+app = FastAPI()
+templates = Jinja2Templates(directory="templates")
 
 class YiJing:
 
@@ -142,10 +143,9 @@ def get_luck():
             out += key + "    "
     return out
 
-@app.route('/', methods=['GET', 'POST'])
-def home():
+@app.post("/", response_class=HTMLResponse)
+async def home(request: Request):
     luck = get_luck()
-    return render_template('home.html', luck=luck)
+    return templates.TemplateResponse("home.html", {"request": request, "luck": luck})
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
